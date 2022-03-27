@@ -13,6 +13,8 @@ public interface IProductRepository extends PagingAndSortingRepository<Product, 
 
     Iterable<Product> findAllByNameContaining(String name);
 
-    @Query(value = "select p from Product as p, Category as c where c.name like ?1")
+    @Query(value = "select p.id, p.name, p.price, p.description, p.image, p.category_id " +
+            "from Product as p join Category as c on p.category_id = c.id " +
+            "where c.name like ?1", nativeQuery = true)
     Iterable<Product> findAllByCategoryNameContaining(String namePattern);
 }

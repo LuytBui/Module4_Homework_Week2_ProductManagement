@@ -25,8 +25,9 @@
         <form action="/products/list" method="get" class="search-form d-flex">
             <input type="text" name="q" placeholder="Tìm kiếm ..."/>
             <select class="form-control" name="searchType">
-                <option value="search-by-product-name" selected>Search by Product name</option>
-                <option value="search-by-category-name">Search by Category name</option>
+                <option value="" selected>... Tìm kiếm theo ... </option>
+                <option value="search-by-product-name">Tên sản phẩm</option>
+                <option value="search-by-category-name">Danh mục</option>
             </select>
             <button class="btn btn-primary">Search</button>
         </form>
