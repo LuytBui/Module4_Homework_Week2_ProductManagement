@@ -1,0 +1,7 @@
+.navbar {
+    margin-bottom: 3em;
+    background: #81e1ea;
+}
+.search-form > :not (:first-child){
+    margin-left: 2em;
+}

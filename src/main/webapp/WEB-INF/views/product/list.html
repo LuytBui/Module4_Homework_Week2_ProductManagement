@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product</title>
+    <div th:replace="layout :: link-style"></div>
+</head>
+<body>
+<div th:replace="layout :: nav-bar"></div>
+<div class="container">
+    <a class="btn btn-primary" th:href="@{/products/add}" >Thêm sản phẩm</a>
+    <table class="table table-bordered">
+        <tr>
+            <th>#</th>
+            <th>Sản phẩm</th>
+            <th>Giá</th>
+            <th>Mô tả</th>
+            <th>Danh mục</th>
+            <th>Ảnh SP</th>
+            <th colspan="2"></th>
+        </tr>
+        <tbody>
+        <tr th:each="product, loop : ${products}">
+            <td th:text="${product.id}"></td>
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.price}"></td>
+            <td th:text="${product.description}"></td>
+
+            <td  th:if="${product.category != null}">
+                <a th:href="@{/products/list?category=__${product.category.id}__}" th:text="${product.category.name}"></a>
+            </td>
+            <td th:if="${product.category == null}"> - </td>
+
+            <td><img class="product-image" th:src="@{/image/__${product.image}__}" alt="Anh SP"></td>
+            <td><a class="btn btn-primary" th:href="@{/products/__${product.id}__/edit}">Edit</a></td>
+            <td><a class="btn btn-danger" th:href="@{/products/__${product.id}__/delete}">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <div>
+        <a th:href="@{'/products'(page=${products.number - 1})}" th:if="${products.hasPrevious()}">Previous</a>
+        <span th:text="${products.number + 1}"></span>/<span th:text="${products.totalPages}"></span>
+        <a th:href="@{'/products'(page=${products.number + 1})}" th:if="${products.hasNext()}">Next</a>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Product</title>
+    <div th:replace="layout :: link-style"></div>
+</head>
+<body>
+<div th:replace="layout :: nav-bar"></div>
+<div class="container">
+    <form method="post" th:object="${product}" th:action="@{/products/__${product.id}__/delete}"
+          enctype="multipart/form-data">
+        <form>
+            <div class="mb-3">
+                <label for="name" class="form-label">Tên sản phẩm</label>
+                <input type="text" class="form-control" id="name" th:value="${product.name}" disabled>
+            </div>
+            <div class="mb-3">
+                <label for="price" class="form-label">Giá</label>
+                <input type="number" class="form-control" id="price" th:value="${product.price}" disabled>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Mô tả</label>
+                <input type="text" class="form-control" id="description" th:value="${product.description}" disabled>
+            </div>
+            <div class="mb-3">
+                <label for="category" class="form-label">Danh mục</label>
+                <input type="text" class="form-control" id="category" th:value="${product.category.name}" disabled>
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">Hình ảnh</label>
+<!--                <input class="form-control" id="image" type="file" th:field="*{image}" disabled>-->
+                <img id="image" class="product-image" th:src="@{/image/__${product.image}__}" alt="">
+            </div>
+
+            <button type="submit" class="btn btn-danger" autofocus>Confirm Delete</button>
+        </form>
+    </form>
+</div>
+</body>
+</html>

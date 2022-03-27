@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product</title>
+    <div th:replace="layout :: link-style"></div>
+</head>
+<body>
+<div th:replace="layout :: nav-bar"></div>
+<div class="container">
+    <form method="post" th:action="@{/products/add}" th:object="${product}" enctype="multipart/form-data">
+        <form>
+            <div class="mb-3">
+                <label for="name" class="form-label">Tên sản phẩm</label>
+                <input type="text" class="form-control" id="name" th:field="*{name}">
+            </div>
+            <div class="mb-3">
+                <label for="price" class="form-label">Giá</label>
+                <input type="number" class="form-control" id="price" th:field="*{price}">
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Mô tả</label>
+                <input type="text" class="form-control" id="description" th:field="*{description}">
+            </div>
+            <div class="mb-3">
+                <label for="category" class="form-label">Danh mục</label>
+                <select class="form-select" id="category" th:field="*{category}">
+                    <option value="" disabled selected>Chọn danh mục sản phẩm</option>
+                    <th:block th:each="category : ${categories}">
+                        <option th:value="${category.id}" th:text="${category.name}"></option>
+                    </th:block>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">Hình ảnh</label>
+                <input class="form-control" id="image" type="file" th:field="*{image}">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Tạo mới</button>
+        </form>
+    </form>
+</div>
+</body>
+</html>
