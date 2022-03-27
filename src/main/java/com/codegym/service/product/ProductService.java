@@ -40,17 +40,17 @@ public class ProductService implements IProductService {
 
 
     @Override
-    public Iterable<Product> findAllByCategoryId(Long id) {
-        return productRepository.findAllByCategoryId(id);
+    public Page<Product> findAllByCategoryId(Long id, Pageable pageable) {
+        return productRepository.findAllByCategoryId(id, pageable);
     }
 
     @Override
-    public Iterable<Product> findAllByNameContaining(String namePattern) {
-        return productRepository.findAllByNameContaining(namePattern);
+    public Page<Product> findAllByNameContaining(String namePattern, Pageable pageable) {
+        return productRepository.findAllByNameContaining(namePattern, pageable);
     }
 
     @Override
-    public Iterable<Product> findAllByCategoryNameContaining(String namePattern) {
-        return productRepository.findAllByCategoryNameContaining("%" + namePattern + "%");
+    public Page<Product> findAllByCategoryNameContaining(String namePattern, Pageable pageable) {
+        return productRepository.findAllByCategoryNameContaining("%" + namePattern + "%", pageable);
     }
 }

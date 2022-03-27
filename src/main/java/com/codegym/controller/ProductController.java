@@ -39,19 +39,19 @@ public class ProductController {
     ) {
         ModelAndView modelAndView = new ModelAndView("product/list");
         if (category_id.isPresent()) {
-            Iterable<Product> products = productService.findAllByCategoryId(category_id.get());
+            Page<Product> products = productService.findAllByCategoryId(category_id.get(), pageable);
             modelAndView.addObject("products", products);
             return modelAndView;
         } else if (q.isPresent() && searchType.isPresent()) {
             switch (searchType.get()) {
                 default:
                 case "search-by-product-name": {
-                    Iterable<Product> products = productService.findAllByNameContaining(q.get());
+                    Page<Product> products = productService.findAllByNameContaining(q.get(), pageable);
                     modelAndView.addObject("products", products);
                     break;
                 }
                 case "search-by-category-name": {
-                    Iterable<Product> products = productService.findAllByCategoryNameContaining(q.get());
+                    Page<Product> products = productService.findAllByCategoryNameContaining(q.get(), pageable);
                     modelAndView.addObject("products", products);
                     break;
                 }
