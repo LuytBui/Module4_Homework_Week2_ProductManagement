@@ -43,8 +43,16 @@ public class ProductController {
             modelAndView.addObject("products", products);
             return modelAndView;
         } else if (q.isPresent() && searchType.isPresent()) {
+
+            modelAndView.addObject("q", q.get());
+            modelAndView.addObject("searchType", searchType.get());
+
             switch (searchType.get()) {
-                default:
+                default: { // advanced search
+                    Page<Product> products = productService.advancedSearch(q.get(), pageable);
+                    modelAndView.addObject("products", products);
+                    break;
+                }
                 case "search-by-product-name": {
                     Page<Product> products = productService.findAllByNameContaining(q.get(), pageable);
                     modelAndView.addObject("products", products);

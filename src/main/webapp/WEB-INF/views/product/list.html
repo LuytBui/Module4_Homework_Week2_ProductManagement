@@ -12,6 +12,7 @@
     <table class="table table-bordered">
         <tr>
             <th>#</th>
+            <th>ID</th>
             <th>Sản phẩm</th>
             <th>Giá</th>
             <th>Mô tả</th>
@@ -21,6 +22,7 @@
         </tr>
         <tbody>
         <tr th:each="product, loop : ${products}">
+            <td th:text="${loop.count}"></td>
             <td th:text="${product.id}"></td>
             <td th:text="${product.name}"></td>
             <td th:text="${product.price}"></td>
@@ -37,10 +39,17 @@
         </tr>
         </tbody>
     </table>
-    <div>
-        <a th:href="@{?(page=${products.number - 1})}" th:if="${products.hasPrevious()}">Previous</a>
+<!--    Không tìm kiếm    -->
+    <div th:if="${q == null}">
+        <a th:href="@{'/products/list'(page=${products.number - 1})}" th:if="${products.hasPrevious()}">Previous</a>
         <span th:text="${products.number + 1}"></span>/<span th:text="${products.totalPages}"></span>
-        <a th:href="@{?(page=${products.number + 1})}" th:if="${products.hasNext()}">Next</a>
+        <a th:href="@{'/products/list'(page=${products.number + 1})}" th:if="${products.hasNext()}">Next</a>
+    </div>
+<!--    Đang tìm kiếm    -->
+    <div th:if="${q != null && searchType!=null}">
+        <a th:href="@{'/products/list'(page=${products.number - 1}, searchType=${searchType}, q=${q}  )}" th:if="${products.hasPrevious()}">Previous</a>
+        <span th:text="${products.number + 1}"></span>/<span th:text="${products.totalPages}"></span>
+        <a th:href="@{'/products/list'(page=${products.number + 1}, searchType=${searchType}, q=${q}   )}" th:if="${products.hasNext()}">Next</a>
     </div>
 </div>
 </body>

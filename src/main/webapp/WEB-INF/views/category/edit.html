@@ -8,13 +8,13 @@
 <body>
 <div th:replace="layout :: nav-bar"></div>
 <div class="container">
-    <form method="post" th:action="@{/categories/add}" th:object="${category}">
+    <form method="post" th:action="@{/categories/__${category.id}__/edit}" th:object="${category}">
         <form>
             <div class="mb-3">
                 <label for="name" class="form-label">Tên danh mục</label>
                 <input type="text" class="form-control" id="name" th:field="*{name}">
             </div>
-            <button type="submit" class="btn btn-primary">Tạo mới</button>
+            <button type="submit" class="btn btn-primary">Cập nhật</button>
         </form>
     </form>
 </div>

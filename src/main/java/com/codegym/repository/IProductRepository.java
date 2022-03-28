@@ -20,7 +20,18 @@ public interface IProductRepository extends PagingAndSortingRepository<Product, 
 
     @Query(value = "select new Product(p.id, p.name, p.price, p.description,p.image, p.category) "+
             "from Product as p, Category as c " +
-            "where c.name like ?1 group by p.id")
+            "where p.category.id = c.id " +
+            "and c.name like %?1%")
     Page<Product> findAllByCategoryNameContaining(String namePattern, Pageable pageable);
+
+    @Query(value = "select new Product(p.id, p.name, p.price, p.description,p.image, p.category) "+
+            "from Product as p, Category as c " +
+            "where p.category.id = c.id " +
+            "and (" +
+            "c.name like %?1% " +
+            " or " +
+            "p.name like %?1% " +
+            ")")
+    Page<Product> advancedSearch(String namePattern, Pageable pageable);
 
 }

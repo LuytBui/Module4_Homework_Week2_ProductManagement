@@ -12,4 +12,6 @@ public interface IProductService extends IGeneralService<Product> {
     Page<Product> findAllByNameContaining(String namePattern, Pageable pageable);
 
     Page<Product> findAllByCategoryNameContaining(String namePattern, Pageable pageable);
+
+    Page<Product> advancedSearch(String namePattern, Pageable pageable);
 }

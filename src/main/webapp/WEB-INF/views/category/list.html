@@ -18,7 +18,10 @@
         <tbody>
         <tr th:each="category, loop : ${categories}">
             <td th:text="${loop.count}"></td>
-            <td th:text="${category.name}"></td>
+            <td>
+                <a th:href="@{/products/list?category=__${category.id}__}" th:text="${category.name}"></a>
+            </td>
+
             <td><a class="btn btn-primary" th:href="@{/categories/__${category.id}__/edit}">Edit</a></td>
             <td><a class="btn btn-danger" th:href="@{/categories/__${category.id}__/delete}">Delete</a></td>
         </tr>
