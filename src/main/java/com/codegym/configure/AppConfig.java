@@ -123,7 +123,6 @@ public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
         return transactionManager;
     }
 
-
     public Properties additionalProperties() {
         Properties properties = new Properties();
         properties.setProperty("hibernate.hbm2ddl.auto", "update");
