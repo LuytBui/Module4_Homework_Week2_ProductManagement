@@ -18,8 +18,9 @@ public interface IProductRepository extends PagingAndSortingRepository<Product, 
 
     Page<Product> findAllByNameContaining(String name, Pageable pageable);
 
-    @Query(value = "select p.id, p.name, p.price, p.description, p.image, p.category_id " +
-            "from Product as p join Category as c on p.category_id = c.id " +
-            "where c.name like ?1", nativeQuery = true)
+    @Query(value = "select new Product(p.id, p.name, p.price, p.description,p.image, p.category) "+
+            "from Product as p, Category as c " +
+            "where c.name like ?1")
     Page<Product> findAllByCategoryNameContaining(String namePattern, Pageable pageable);
+
 }
