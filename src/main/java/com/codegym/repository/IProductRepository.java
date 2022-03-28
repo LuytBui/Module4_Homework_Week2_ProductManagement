@@ -20,7 +20,7 @@ public interface IProductRepository extends PagingAndSortingRepository<Product, 
 
     @Query(value = "select new Product(p.id, p.name, p.price, p.description,p.image, p.category) "+
             "from Product as p, Category as c " +
-            "where c.name like ?1")
+            "where c.name like ?1 group by p.id")
     Page<Product> findAllByCategoryNameContaining(String namePattern, Pageable pageable);
 
 }
